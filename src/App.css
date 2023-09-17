@@ -1,0 +1,173 @@
+
+.listItem {
+  display: flex;
+  gap: 12px;
+  /* border-bottom: 1px solid rgb(0, 0, 0, 0.4); */
+  padding: 1em;
+  display: flex;
+  /* flex-direction: column; */
+  /* box-shadow: inset 0px 1px 1px 1px rgb(0, 0, 0, 10); */
+  margin: 1.5em;
+  background-color: aliceblue;
+  border-radius: 12px;
+}
+
+
+.pageTitle {
+ font-size: calc(1vw + 2rem);
+}
+
+
+.container {
+  max-width: 1290px;
+  margin-inline:auto;
+  /* display: grid; */
+  place-items: center;
+}
+
+.pageTitle {
+  text-align: center;
+  color: aliceblue;
+}
+
+
+.list {
+  border-radius: 12px;
+  margin-block: 30px;
+}
+
+.mid-section {
+  background-color: powderblue;
+  border: 1px solid powderblue;
+  border-radius: 12px;
+  margin-block: 30px;
+  position: relative;
+}
+
+.renderPage {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.4);
+    padding-block: 12px;
+    border-color: aliceblue;
+    color: aliceblue;
+    cursor: pointer; 
+    /* tıklanma efectti */
+}
+
+.basKet {
+  position: absolute;
+    right: 30px;
+     background-color:aliceblue;
+     border: none; 
+    border-radius: 12px;
+    padding: 3px;
+    padding-inline: 14px;
+}
+
+.basKet:hover {
+  transform: scale(1.1);
+}
+
+.sepet {
+  width: 325px;
+  height: 100%;
+  background-color: white;
+  position: fixed;
+  right: -350px;
+  top: 0;
+  transition: all 200ms ease-in-out;
+  background-color:powderblue ;
+  border: 1px solid black;
+  border-radius: 12px;
+  border: none;
+   gap: 12px;
+  overflow:scroll;
+  scrollbar-color: pink ;
+
+}
+
+
+.sepet.active {
+  right: 0;
+  transition: all 500ms ease-in-out;
+  margin-block: 30px;
+  /* background: repeating-linear-gradient(45deg, powderblue, white 68px); */
+  background: linear-gradient(45deg, powderblue, transparent);
+}
+
+
+.closeBtn {
+  padding-inline: 8px;
+  border-radius: 12px;
+  border: none;
+  margin-inline: 1px;
+  background-color: red;
+  color: white;
+  margin: 6px;
+  font-size: 19px;
+  font-family: sans-serif;
+  cursor: pointer; 
+  height: 30px;
+}
+
+.closeBtn:hover {
+  transform: scale(1.1);
+}
+.Store-click {
+  background-color:powderblue;
+     border: none; 
+    border-radius: 12px;
+    padding: 3px;
+    padding-inline: 14px;  
+    color: white;
+}
+
+.Store-click:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background: linear-gradient(45deg, powderblue, transparent);
+  
+}
+
+.basket-seciton {
+  width: 300px;
+  margin: 1rem;
+  background-color: aliceblue;
+  border-radius: 12px;
+  display: flex;
+  padding: 12px;
+  gap: 5px;
+ 
+  flex-direction: column;
+}
+
+.basket-sepet  li{
+  font-family: sans-serif;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.4);
+  padding-block: 12px;
+  
+}
+
+.basket-remove {
+color: white;
+background-color: cadetblue;
+border-radius: 12px;
+padding: 3px;
+border: none;
+display: flex;
+justify-content: center;
+margin-inline: 6px;
+cursor: pointer;
+}
+
+.basket-remove:hover {
+  transform: scale(1.1);
+}
+
+.onedelete-basket {
+  cursor: pointer;
+  padding: 2px;
+}
+
