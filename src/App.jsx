@@ -107,10 +107,15 @@ let renderProducts = filterCategorys.map(x => {
 })
 
 function addToBasket(product) {
-  setBasket([...basket, product]) 
-  product.stock -= 1
-  setProductLists([...productLists])
-  console.log(product.stock);
+  if(product.stock > 0 ) {
+    setBasket([...basket, product]) 
+    product.stock -= 1
+    setProductLists([...productLists])
+    console.log(product.stock);
+  } else {
+    console.log(product.stock);
+  }
+
 }
 
 function basketStock(id) {
