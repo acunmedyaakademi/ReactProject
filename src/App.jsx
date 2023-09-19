@@ -2,10 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 export const App = () => {
-  const [products, setProducts] = useState();
-  const [category, setCategories] = useState("all");
-  const [isDrawer, setIsDrawer] = useState(false);
-  const [basket, setBasket] = useState([]);
+  
   const productList = [
   
     {
@@ -85,15 +82,19 @@ export const App = () => {
     },
     
   ];
+  const [productLists, setProductLists] = useState(productList);
+  const [category, setCategories] = useState("all");
+  const [isDrawer, setIsDrawer] = useState(false);
+  const [basket, setBasket] = useState([]);
+
  
-const filterCategorys = productList.filter( x =>  {
+const filterCategorys = productLists.filter( x =>  {
   if(category === "all") return x
   return x.category === category
   }
 )
 
 let renderProducts = filterCategorys.map(x => {
-  
   return(
     <li className="listItem" key={x.id}>
      <h4 className="title"><strong>Ürünler: </strong>{x.title}</h4>
@@ -101,13 +102,25 @@ let renderProducts = filterCategorys.map(x => {
      <span className="price"> <strong> Fiyatlar: </strong>{x.price}$</span>
      <span className="stock"><strong>STOK: </strong>{x.stock}</span>
      <button className="Store-click" onClick={() => addToBasket(x)}>Sepet Ekle</button>
-
     </li>
   )
 })
 
 function addToBasket(product) {
-  setBasket([... basket, product]) 
+  setBasket([...basket, product]) 
+  product.stock -= 1
+  setProductLists([...productLists])
+  console.log(product.stock);
+}
+
+function basketStock(id) {
+  productLists.map(x =>  {
+  if( x.id == id){
+      x.stock += 1
+      setProductLists([...productLists])
+    }
+  })
+ 
 }
 
 function removeBasketAll() {
@@ -172,8 +185,8 @@ const removeBasket = (index) => {
              <span className="basket-title">ÜrünAdı: {x.title}</span>
              <span className="basket-category"> Kategori: {x.category}</span>
              <span className="basket-price">Price: {x.price}</span>
-             <span className="basket-stock">Stok: {x.stock}</span>
-             <p className="onedelete-basket" onClick={() => removeBasket(product)}>❌</p>
+             {/* <span className="basket-stock">Stok: {x.stock}</span> */}
+             <p id ={x.id} className="onedelete-basket" onClick={(e) => {removeBasket(product),basketStock(e.target.id) }}>❌</p>
             </li>
           ))}
         </ul>
