@@ -86,8 +86,8 @@ export const App = () => {
   const [category, setCategories] = useState("all");
   const [isDrawer, setIsDrawer] = useState(false);
   const [basket, setBasket] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
- 
 const filterCategorys = productLists.filter( x =>  {
   if(category === "all") return x
   return x.category === category
@@ -106,6 +106,22 @@ let renderProducts = filterCategorys.map(x => {
   )
 })
 
+const handleSearch = (e) => {
+  const searchInputValue = e.target.value
+  setSearchInput(searchInputValue)
+
+  const filterProducts = productList.filter((product) => 
+  product.title.toLowerCase().includes(searchInputValue.toLowerCase())
+  );
+  if(searchInputValue === "") {
+    console.log(productList);
+  }
+  setProductLists(filterProducts)
+  console.log(filterProducts);
+}
+
+// stock Control + -
+
 function addToBasket(product) {
   if(product.stock > 0 ) {
     setBasket([...basket, product]) 
@@ -115,7 +131,6 @@ function addToBasket(product) {
   } else {
     console.log(product.stock);
   }
-
 }
 
 function basketStock(id) {
@@ -162,7 +177,7 @@ const removeBasket = (index) => {
   function handleBasket() {
     setIsDrawer(!isDrawer)
   }
-
+// sepet ac kapat true false 
 
  return (
   <div className="container">
@@ -171,9 +186,11 @@ const removeBasket = (index) => {
 
     <div className="renderPage" style={{display: "flex", gap:"1em", justifyContent: "center"}}>
      <li key={"all"} onClick={showAllProducts}>All</li> {renderCategory} 
+  
 
       <button className="basKet" onClick={handleBasket}>Sepet </button>
     </div>
+    <input className="checkinput" placeholder="Search" onClick={handleSearch}/>
     <ul className="list">{renderProducts}</ul>
     </div>
     <div className={isDrawer ? "sepet active": "sepet" }>
@@ -203,5 +220,5 @@ const removeBasket = (index) => {
       <button className="basket-remove" onClick={() => removeBasketAll()}>Tümünü Sil</button>
     </div>
   </div>
- )
+ ) 
 }

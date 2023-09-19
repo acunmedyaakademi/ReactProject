@@ -171,3 +171,23 @@ cursor: pointer;
   padding: 2px;
 }
 
+.checkinput {
+    border-radius: 12px;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    padding: 6px;
+    margin-block: 30px;
+}
+ 
+
+
+
+
+.checkinput:focus {
+  color: rgb(16, 16, 16);
+  /* outline: none; */
+  outline-color: powderblue;
+}
