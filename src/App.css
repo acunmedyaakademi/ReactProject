@@ -55,12 +55,8 @@
 
 .basKet {
   position: absolute;
-    right: 30px;
-     background-color:aliceblue;
-     border: none; 
-    border-radius: 12px;
-    padding: 3px;
-    padding-inline: 14px;
+    right: 171px;
+   
 }
 
 .basKet:hover {
@@ -190,4 +186,11 @@ cursor: pointer;
   color: rgb(16, 16, 16);
   /* outline: none; */
   outline-color: powderblue;
+}
+
+.change-list {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-block: 12px;
 }

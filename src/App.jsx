@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Switch , Pagination } from "antd";
 import "./App.css";
 
 export const App = () => {
@@ -159,7 +160,6 @@ function removeBasketAll() {
   basket.forEach( x=> {
     x.stock += 1
     setCategories("all")
-  
   })
 
 }
@@ -201,15 +201,15 @@ const removeBasket = (index) => {
 
     <div className="renderPage" style={{display: "flex", gap:"1em", justifyContent: "center"}}>
      <li key={"all"} onClick={showAllProducts}>All</li> {renderCategory} 
-  
 
-      <button className="basKet" onClick={handleBasket}>Sepet </button>
+      <Switch className="basKet" onClick={handleBasket}></Switch>
     </div>
     <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
     <ul className="list">{renderProducts}</ul>
+    <Pagination className="change-list" defaultCurrent={1} total={50} />
     </div>
     <div className={isDrawer ? "sepet active": "sepet" }>
-      <button className="closeBtn" onClick={handleBasket}>x</button>
+      {/* <button className="closeBtn" onClick={handleBasket}>x</button> */}
       
       
       <div className="basket-seciton">
