@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Switch , Pagination } from "antd";
+import { StarOutlined, ShoppingCartOutlined, StarTwoTone } from '@ant-design/icons';
 import "./App.css";
 
 export const App = () => {
@@ -88,7 +89,17 @@ export const App = () => {
   const [isDrawer, setIsDrawer] = useState(false);
   const [basket, setBasket] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  // const [ baskettotal, setBasketTotal] = useState(0);
+  const [admin, setadminpanel] = useState(false);
+
+// ---------- chatgbt 
+  function addAdminPanel (e) {
+    e.preventDefault()
+    const form = new FormData(e.target)
+    Object.fromEntries(form)
+    form.id = Date.now()
+    setProductLists([...productLists , Object.fromEntries(form)])
+    console.log(productLists);
+  }
 
 const filterCategorys = productLists.filter( x =>  {
   if(category === "all") return x
@@ -193,6 +204,10 @@ const removeBasket = (index) => {
   function handleBasket() {
     setIsDrawer(!isDrawer)
   }
+
+  function adminPanel() {
+    setadminpanel(!admin)
+  }
   
  return (
   <div className="container">
@@ -201,17 +216,17 @@ const removeBasket = (index) => {
 
     <div className="renderPage" style={{display: "flex", gap:"1em", justifyContent: "center"}}>
      <li key={"all"} onClick={showAllProducts}>All</li> {renderCategory} 
-
-      <Switch className="basKet" onClick={handleBasket}></Switch>
+     <ShoppingCartOutlined className="basKet" onClick={handleBasket}/>
+     
+      <Switch onClick={() => adminPanel()}/>
     </div>
     <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
     <ul className="list">{renderProducts}</ul>
     <Pagination className="change-list" defaultCurrent={1} total={50} />
     </div>
     <div className={isDrawer ? "sepet active": "sepet" }>
-      {/* <button className="closeBtn" onClick={handleBasket}>x</button> */}
-      
-      
+      <button className="closeBtn" onClick={handleBasket}>x</button>
+    
       <div className="basket-seciton">
         <ul>
           <li>Satın Alıncak Ürünler</li>
@@ -232,6 +247,24 @@ const removeBasket = (index) => {
         </ul>
       </div>
       <button className="basket-remove" onClick={() => removeBasketAll()}>Tümünü Sil</button>
+    </div>
+    <div className= {admin ? "admin-panel active": "admin-panel"}>
+      <div className="admin-text">
+            Admin Panel
+            <form onSubmit={addAdminPanel} action="">
+                <input type="text" name="title" placeholder="Ürünadı"/>
+                <input  type="text" name="price" placeholder="Fiyat" />
+                <input type="text" name="stock" placeholder="Stok" />
+                <select name="category">
+                <option value="Kategoriler">All</option>
+                <option value="Tekstil">Teksil</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Spors">Spors</option>
+               </select>
+                <button>Ekle</button>
+            </form>
+      </div>
+    
     </div>
   </div>
  ) 
