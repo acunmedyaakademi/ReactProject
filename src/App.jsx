@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 export const App = () => {
@@ -140,7 +140,6 @@ function basketStock(id) {
       setProductLists([...productLists])
     }
   })
- 
 }
 
 function removeBasketAll() {
@@ -162,7 +161,7 @@ const removeBasket = (index) => {
   // includes icinde varmı diye bakıyor
 
   function showAllProducts() {
-    setCategories("all");
+    setCategories("all");    
   }
   // all olarak geliyor sadece  onclick ile  hepsini tekrar getirdim
  
@@ -173,12 +172,12 @@ const removeBasket = (index) => {
   const renderCategory = oneCategories.map(x => {
     return <li key={x} onClick={changeCategories}>{x}</li>
   })
+// sepet ac kapat true false 
 
   function handleBasket() {
     setIsDrawer(!isDrawer)
   }
-// sepet ac kapat true false 
-
+  
  return (
   <div className="container">
     <div className="mid-section">
@@ -190,7 +189,7 @@ const removeBasket = (index) => {
 
       <button className="basKet" onClick={handleBasket}>Sepet </button>
     </div>
-    <input className="checkinput" placeholder="Search" onClick={handleSearch}/>
+    <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
     <ul className="list">{renderProducts}</ul>
     </div>
     <div className={isDrawer ? "sepet active": "sepet" }>
