@@ -169,6 +169,10 @@ cursor: pointer;
 .onedelete-basket {
   cursor: pointer;
   padding: 2px;
+  border: none;
+  background: none;
+
+  flex-direction: column;
 }
 
 .checkinput {
@@ -182,10 +186,6 @@ cursor: pointer;
     margin-block: 30px;
 }
  
-
-
-
-
 .checkinput:focus {
   color: rgb(16, 16, 16);
   /* outline: none; */

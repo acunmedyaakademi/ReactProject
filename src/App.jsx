@@ -87,6 +87,7 @@ export const App = () => {
   const [isDrawer, setIsDrawer] = useState(false);
   const [basket, setBasket] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  // const [ baskettotal, setBasketTotal] = useState(0);
 
 const filterCategorys = productLists.filter( x =>  {
   if(category === "all") return x
@@ -101,7 +102,7 @@ let renderProducts = filterCategorys.map(x => {
      <span className="category"><strong>Kategorileri: </strong>{x.category}</span>
      <span className="price"> <strong> Fiyatlar: </strong>{x.price}$</span>
      <span className="stock"><strong>STOK: </strong>{x.stock}</span>
-     <button className="Store-click" onClick={() => addToBasket(x)}>Sepet Ekle</button>
+     <button className="Store-click" onClick={() => {addToBasket(x), handleTotal()}}>Sepet Ekle</button>
     </li>
   )
 })
@@ -127,7 +128,6 @@ function addToBasket(product) {
     setBasket([...basket, product]) 
     product.stock -= 1
     setProductLists([...productLists])
-    console.log(product.stock);
   } else {
     console.log(product.stock);
   }
@@ -142,16 +142,32 @@ function basketStock(id) {
   })
 }
 
+// basketTotal Control--
+
+function handleTotal() {
+  let totalprice = 0
+  basket.forEach(x => {
+   totalprice += x.price
+  })
+  return totalprice 
+}
+
+// all delete--
+
 function removeBasketAll() {
   setBasket([])
+  basket.forEach( x=> {
+    x.stock += 1
+    setCategories("all")
+  
+  })
+
 }
-// all delete--
 
 const removeBasket = (index) => {
   const updateBasket = basket.filter((i ,itemIndex ) => itemIndex !== index)
   setBasket(updateBasket)
 }
-// Delete sepet--
 
   const oneCategories = [];
   productList.forEach(products => {
@@ -206,14 +222,13 @@ const removeBasket = (index) => {
              <span className="basket-title">ÜrünAdı: {x.title}</span>
              <span className="basket-category"> Kategori: {x.category}</span>
              <span className="basket-price">Price: {x.price}</span>
-             {/* <span className="basket-stock">Stok: {x.stock}</span> */}
-             <p id ={x.id} className="onedelete-basket" onClick={(e) => {removeBasket(product),basketStock(e.target.id) }}>❌</p>
+             <button id ={x.id} className="onedelete-basket" onClick={(e) => {removeBasket(product),basketStock(e.target.id) }}>❌</button>
             </li>
           ))}
         </ul>
         
         <ul className="total-basket">
-              <span>Toplam: </span>
+              <span>Toplam: {handleTotal()} </span>
         </ul>
       </div>
       <button className="basket-remove" onClick={() => removeBasketAll()}>Tümünü Sil</button>
