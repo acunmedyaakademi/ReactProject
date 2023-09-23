@@ -95,9 +95,9 @@ export const App = () => {
   function addAdminPanel (e) {
     e.preventDefault()
     const form = new FormData(e.target)
-    Object.fromEntries(form)
-    form.id = Date.now()
+    form.append("id", Date.now())
     setProductLists([...productLists , Object.fromEntries(form)])
+    console.log(Object.fromEntries(form));
     console.log(productLists);
   }
 
@@ -118,6 +118,8 @@ let renderProducts = filterCategorys.map(x => {
     </li>
   )
 })
+
+//  Search
 
 const handleSearch = (e) => {
   const searchInputValue = e.target.value
@@ -146,6 +148,7 @@ function addToBasket(product) {
 }
 
 function basketStock(id) {
+  console.log(id);
   productLists.map(x =>  {
   if( x.id == id){
       x.stock += 1
@@ -159,7 +162,7 @@ function basketStock(id) {
 function handleTotal() {
   let totalprice = 0
   basket.forEach(x => {
-   totalprice += x.price
+   totalprice += Number(x.price)
   })
   return totalprice 
 }
@@ -174,11 +177,11 @@ function removeBasketAll() {
   })
 
 }
-
-const removeBasket = (index) => {
-  const updateBasket = basket.filter((i ,itemIndex ) => itemIndex !== index)
-  setBasket(updateBasket)
-}
+//  Manuel Delete
+  const removeBasket = (product) => {
+    const updateBasket = basket.filter((x ,productItem ) => productItem !== product)
+    setBasket(updateBasket)
+  }
 
   const oneCategories = [];
   productList.forEach(products => {
@@ -220,10 +223,15 @@ const removeBasket = (index) => {
      
       <Switch onClick={() => adminPanel()}/>
     </div>
+
     <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
+
     <ul className="list">{renderProducts}</ul>
+
     <Pagination className="change-list" defaultCurrent={1} total={50} />
+
     </div>
+    
     <div className={isDrawer ? "sepet active": "sepet" }>
       <button className="closeBtn" onClick={handleBasket}>x</button>
     
@@ -231,6 +239,7 @@ const removeBasket = (index) => {
         <ul>
           <li>Satın Alıncak Ürünler</li>
         </ul>
+
         <ul className="basket-sepet">
           {basket.map((x, product) =>(
             <li key={product}>
@@ -246,8 +255,10 @@ const removeBasket = (index) => {
               <span>Toplam: {handleTotal()} </span>
         </ul>
       </div>
+
       <button className="basket-remove" onClick={() => removeBasketAll()}>Tümünü Sil</button>
     </div>
+
     <div className= {admin ? "admin-panel active": "admin-panel"}>
       <div className="admin-text">
             Admin Panel
