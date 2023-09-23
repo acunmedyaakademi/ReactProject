@@ -115,6 +115,7 @@ let renderProducts = filterCategorys.map(x => {
      <span className="price"> <strong> Fiyatlar: </strong>{x.price}$</span>
      <span className="stock"><strong>STOK: </strong>{x.stock}</span>
      <button className="Store-click" onClick={() => {addToBasket(x), handleTotal()}}>Sepet Ekle</button>
+     <button className={admin ? "admin-delete": "admin-delete deactive"} id={x.id} onClick={listItemRemove}>X</button>
     </li>
   )
 })
@@ -133,6 +134,12 @@ const handleSearch = (e) => {
   }
   setProductLists(filterProducts)
   console.log(filterProducts);
+}
+
+// admin panel Dell--
+function listItemRemove(e) {
+  const filterRemoveItem = productLists.filter((product) => product.id != e.target.id) 
+  setProductLists(filterRemoveItem)
 }
 
 // stock Control + -
