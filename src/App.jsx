@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Switch , Pagination } from "antd";
+import 'primeicons/primeicons.css';
 import { StarOutlined, ShoppingCartOutlined, StarTwoTone } from '@ant-design/icons';
 import "./App.css";
 
@@ -69,7 +70,7 @@ export const App = () => {
     },
     {
       id: 9,
-      title: "Gözluk",
+      title: "Gözlük",
       category:"Spors",
       price: 300,
       stock: 5
@@ -90,7 +91,7 @@ export const App = () => {
   const [basket, setBasket] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [admin, setadminpanel] = useState(false);
-
+ 
 // ---------- chatgbt 
   function addAdminPanel (e) {
     e.preventDefault()
@@ -115,7 +116,7 @@ let renderProducts = filterCategorys.map(x => {
      <span className="price"> <strong> Fiyatlar: </strong>{x.price}$</span>
      <span className="stock"><strong>STOK: </strong>{x.stock}</span>
      <button className="Store-click" onClick={() => {addToBasket(x), handleTotal()}}>Sepet Ekle</button>
-     <button className={admin ? "admin-delete": "admin-delete deactive"} id={x.id} onClick={listItemRemove}>X</button>
+     <button className={admin ? "admin-delete": "admin-delete deactive"} id={x.id} onClick={listItemRemove}>x</button>
     </li>
   )
 })
@@ -130,13 +131,12 @@ const handleSearch = (e) => {
   product.title.toLowerCase().includes(searchInputValue.toLowerCase())
   );
   if(searchInputValue === "") {
-    console.log(productList);
   }
   setProductLists(filterProducts)
-  console.log(filterProducts);
 }
 
 // admin panel Dell--
+
 function listItemRemove(e) {
   const filterRemoveItem = productLists.filter((product) => product.id != e.target.id) 
   setProductLists(filterRemoveItem)
@@ -164,6 +164,12 @@ function basketStock(id) {
   })
 }
 
+//  Manuel Delete
+const removeBasket = (product) => {
+  const updateBasket = basket.filter((x ,productItem ) => productItem !== product)
+  setBasket(updateBasket)
+}
+
 // basketTotal Control--
 
 function handleTotal() {
@@ -182,13 +188,7 @@ function removeBasketAll() {
     x.stock += 1
     setCategories("all")
   })
-
 }
-//  Manuel Delete
-  const removeBasket = (product) => {
-    const updateBasket = basket.filter((x ,productItem ) => productItem !== product)
-    setBasket(updateBasket)
-  }
 
   const oneCategories = [];
   productList.forEach(products => {
@@ -218,14 +218,14 @@ function removeBasketAll() {
   function adminPanel() {
     setadminpanel(!admin)
   }
-  
+
  return (
   <div className="container">
     <div className="mid-section">
     <h1 className="pageTitle">Products</h1>
 
     <div className="renderPage" style={{display: "flex", gap:"1em", justifyContent: "center"}}>
-     <li key={"all"} onClick={showAllProducts}>All</li> {renderCategory} 
+     <li key={"all"} onClick={showAllProducts}>All</li> {renderCategory}
      <ShoppingCartOutlined className="basKet" onClick={handleBasket}/>
      
       <Switch onClick={() => adminPanel()}/>
@@ -234,8 +234,7 @@ function removeBasketAll() {
     <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
 
     <ul className="list">{renderProducts}</ul>
-
-    <Pagination className="change-list" defaultCurrent={1} total={50} />
+    <Pagination className="change-list"  defaultCurrent={1} total={30} />
 
     </div>
     
@@ -268,7 +267,9 @@ function removeBasketAll() {
 
     <div className= {admin ? "admin-panel active": "admin-panel"}>
       <div className="admin-text">
-            Admin Panel
+           <div className="text-header">
+           Admin Panel <i className="pi pi-spin pi-cog" style={{ fontSize: '2rem'}}></i>
+           </div>
             <form onSubmit={addAdminPanel} action="">
                 <input type="text" name="title" placeholder="Ürünadı"/>
                 <input  type="text" name="price" placeholder="Fiyat" />
