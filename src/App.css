@@ -124,7 +124,6 @@
   display: flex;
   padding: 12px;
   gap: 5px;
- 
   flex-direction: column;
 }
 
@@ -158,7 +157,6 @@ cursor: pointer;
   padding: 2px;
   border: none;
   background: none;
-
   flex-direction: column;
 }
 
@@ -175,7 +173,6 @@ cursor: pointer;
  
 .checkinput:focus {
   color: rgb(16, 16, 16);
-  /* outline: none; */
   outline-color: powderblue;
 }
 
@@ -194,7 +191,6 @@ cursor: pointer;
   position: fixed;
   background: linear-gradient(45deg, powderblue, transparent);
   border-radius: 12px;
-  /* border: 1px solid blue; */
  text-align: center;
  display: flex;
  flex-direction: column;
@@ -238,7 +234,6 @@ cursor: pointer;
   transition: all 500ms ease-in-out;
   background: linear-gradient(45deg, powderblue, transparent);
  text-align: center;
- 
 }
 
 .admin-text {

@@ -92,7 +92,6 @@ export const App = () => {
   const [searchInput, setSearchInput] = useState("");
   const [admin, setadminpanel] = useState(false);
  
-// ---------- chatgbt 
   function addAdminPanel (e) {
     e.preventDefault()
     const form = new FormData(e.target)
@@ -148,7 +147,7 @@ function addToBasket(product) {
   if(product.stock > 0 ) {
     setBasket([...basket, product]) 
     product.stock -= 1
-    setProductLists([...productLists])
+    // setProductLists([...productLists])
   } else {
     console.log(product.stock);
   }
@@ -234,7 +233,7 @@ function removeBasketAll() {
     <input className="checkinput" placeholder="Search" onChange={handleSearch}/>
 
     <ul className="list">{renderProducts}</ul>
-    <Pagination className="change-list"  defaultCurrent={1} total={30} />
+    
 
     </div>
     
